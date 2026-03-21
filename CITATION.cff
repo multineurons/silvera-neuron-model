@@ -1,0 +1,41 @@
+cff-version: 1.2.0
+message: "If you use this model in your research, please cite it using the following metadata."
+
+title: "Silvera Neuron Model: Two-Exponential Continuous Dynamical System for Cortical Spiking Neurons"
+
+abstract: >
+  A single-compartment continuous dynamical system for simulating cortical spiking
+  neurons, governed by five ordinary differential equations and 17 tunable parameters.
+  Requires only two exponential evaluations per integration step. Reproduces RS, FS,
+  IB, CH, LTS and RZ phenotypes, depolarization block, and post-inhibitory rebound
+  phenomena through continuous limit cycle dynamics without discontinuous reset.
+
+authors:
+  - family-names: Silvera
+    given-names: Paolo Giovanni
+    orcid: https://orcid.org/0009-0005-9234-1818
+    country: IT
+    city: Milan
+
+version: "1.0.0"
+date-released: 2026-03-01
+license: CC-BY-NC-SA-4.0
+
+doi: 10.5281/zenodo.19011537
+url: https://doi.org/10.5281/zenodo.19011537
+repository-code: https://github.com/paologiovannisilvera/silvera-neuron-model
+
+keywords:
+  - spiking neuron model
+  - cortical neurons
+  - continuous dynamics
+  - limit cycle
+  - neuromorphic computing
+  - Hodgkin-Huxley
+  - computational neuroscience
+  - Regular Spiking
+  - Fast Spiking
+  - Intrinsic Bursting
+  - Chattering
+  - Low-Threshold Spiking
+  - Resonator
