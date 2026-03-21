@@ -18,12 +18,12 @@ authors:
     city: Milan
 
 version: "1.0.0"
-date-released: 2026-03-01
+date-released: 2026-03-14
 license: CC-BY-NC-SA-4.0
 
 doi: 10.5281/zenodo.19011537
 url: https://doi.org/10.5281/zenodo.19011537
-repository-code: https://github.com/paologiovannisilvera/silvera-neuron-model
+repository-code: https://github.com/multineurons/silvera-neuron-model
 
 keywords:
   - spiking neuron model
