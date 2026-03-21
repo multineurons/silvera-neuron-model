@@ -39,7 +39,7 @@ Unlike reset-based models (e.g., Izhikevich, AdEx), the Silvera Model generates 
 In Hodgkin–Huxley, the inactivation variable *h* is a direct function of voltage. In the Silvera Model, *h* is driven mechanistically by *m*:
 
 ```
-dh/dt = (1 - h) * (m * rate_h1 - h * rate_h2)
+dh/dt = (1 - h) · (m · rate_h1 - h · rate_h2)
 ```
 
 During depolarization, rising *m* drives *h* upward (inactivation). During recovery, the term −h·rate_h2 returns *h* to zero with time constant τ = 1/rate_h2. This produces an emergent sigmoid recovery trajectory without any precalculated lookup table.
@@ -49,7 +49,7 @@ During depolarization, rising *m* drives *h* upward (inactivation). During recov
 ## Governing Equations
 
 ```
-Cm * dV/dt = -gL(V - Vrest) - gNa·m(1-h)(V - ENa) - gK·n(V - EK) - u + Istim
+Cm · dV/dt = -gL(V - Vrest) - gNa·m·(1-h)·(V - ENa) - gK·n(V - EK) - u + Istim
 dm/dt      = (m∞(V) - m) · rate_Na
 dn/dt      = (n∞(V) - n) · rate_K
 dh/dt      = (1 - h) · (m · rate_h1 - h · rate_h2)
@@ -95,6 +95,7 @@ The model reproduces the following cardinal cortical firing patterns by varying 
 | `model_silvera.py`  | Python implementation (NumPy, RK4)       |
 | `CITATION.cff`      | Citation metadata                        |
 | `README.md`         | This file                                |
+| `LICENSE`           | License file                             |
 
 ---
 
