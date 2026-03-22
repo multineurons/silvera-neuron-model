@@ -10,7 +10,8 @@
 
 **Author:** Paolo Giovanni Silvera  
 **ORCID:** 0009-0005-9234-1818  
-**DOI:** [10.5281/zenodo.19011537](https://doi.org/10.5281/zenodo.19011537)  
+**DOI:** [10.5281/zenodo.19011537](https://doi.org/10.5281/zenodo.19011537)
+**EMAIL:** psilvera@libero.it
 **Year:** 2026  
 
 ---
@@ -49,7 +50,7 @@ During depolarization, rising *m* drives *h* upward (inactivation). During recov
 ## Governing Equations
 
 ```
-Cm · dV/dt = -gL(V - Vrest) - gNa·m·(1-h)·(V - ENa) - gK·n(V - EK) - u + Istim
+Cm · dV/dt = -gL(V - Vrest) - gNa · m · (1-h) · (V - ENa) - gK · n · (V - EK) - u + Istim
 dm/dt      = (m∞(V) - m) · rate_Na
 dn/dt      = (n∞(V) - n) · rate_K
 dh/dt      = (1 - h) · (m · rate_h1 - h · rate_h2)
