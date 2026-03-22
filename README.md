@@ -11,7 +11,7 @@
 **Author:** Paolo Giovanni Silvera  
 **ORCID:** 0009-0005-9234-1818  
 **DOI:** [10.5281/zenodo.19011537](https://doi.org/10.5281/zenodo.19011537)  
-**EMAIL:** psilvera@libero.it
+**EMAIL:** psilvera@libero.it  
 **Year:** 2026  
 
 ---
