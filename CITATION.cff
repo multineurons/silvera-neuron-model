@@ -7,8 +7,8 @@ abstract: >
   A single-compartment continuous dynamical system for simulating cortical spiking
   neurons, governed by five ordinary differential equations and 17 tunable parameters.
   Requires only two exponential evaluations per integration step. Reproduces RS, FS,
-  IB, CH, LTS and RZ phenotypes, depolarization block, and post-inhibitory rebound
-  phenomena through continuous limit cycle dynamics without discontinuous reset.
+  IB, CH, LTS, RZ, depolarization block, and post-inhibitory rebound and other phenotypes
+  through continuous limit cycle dynamics without discontinuous reset.
 
 authors:
   - family-names: Silvera

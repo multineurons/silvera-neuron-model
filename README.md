@@ -9,9 +9,9 @@
 ---
 
 **Author:** Paolo Giovanni Silvera  
-**ORCID:** 0009-0005-9234-1818  
+**ORCID:** [0009-0005-9234-1818](https://orcid.org/0009-0005-9234-1818)  
 **DOI:** [10.5281/zenodo.19011537](https://doi.org/10.5281/zenodo.19011537)  
-**EMAIL:** psilvera@libero.it  
+**Email:** psilvera@libero.it  
 **Year:** 2026  
 
 ---
@@ -29,7 +29,7 @@ Unlike reset-based models (e.g., Izhikevich, AdEx), the Silvera Model generates 
 - **5 state variables:** V (membrane potential), m (Na⁺ activation), n (K⁺ activation), h (Na⁺ inactivation), u (slow adaptation)
 - **2 exponential evaluations per step** (for m∞ and n∞ via sigmoid)
 - **No discontinuous reset** — spikes arise and terminate through continuous dynamics
-- **17 biophysically interpretable parameters**, organized into four functional groups
+- **17 biophysically interpretable parameters**, organised into four functional groups
 - **Compatible with gradient-based training** (BPTT, surrogate gradient methods)
 - **Suitable for FPGA and analogue neuromorphic implementations**
 
@@ -43,7 +43,7 @@ In Hodgkin–Huxley, the inactivation variable *h* is a direct function of volta
 dh/dt = (1 - h) · (m · rate_h1 - h · rate_h2)
 ```
 
-During depolarization, rising *m* drives *h* upward (inactivation). During recovery, the term −h·rate_h2 returns *h* to zero with time constant τ = 1/rate_h2. This produces an emergent sigmoid recovery trajectory without any precalculated lookup table.
+During depolarisation, rising *m* drives *h* upward (inactivation). During recovery, the term −h·rate_h2 returns *h* to zero with time constant τ = 1/rate_h2. This produces an emergent sigmoid recovery trajectory without any precalculated lookup table or voltage-dependent gating function.
 
 ---
 
@@ -78,25 +78,32 @@ The model reproduces the following cardinal cortical firing patterns by varying 
 | **IB** — Intrinsic Bursting     | L5 pyramidal          | Initial burst followed by tonic spiking                    |
 | **CH** — Chattering             | L4/6 neurons          | Rhythmic high-frequency burst firing                       |
 | **LTS** — Low-Threshold Spiking | SST+ interneuron      | Low threshold, wide spikes, rebound burst                  |
+| **FA** — Frequency Adaptation   | L2/3 pyramidal        | Progressive ISI lengthening under sustained stimulation    |
 | **RZ** — Resonator              | Cortical interneurons | Subthreshold oscillations (~13 Hz), frequency-selective spiking |
+| **NT** — Integrator             | Tonic cortical cells  | Graded, non-oscillatory subthreshold integration           |
+| **Rebound Spike**               | Various               | Single spike following hyperpolarising pulse               |
+| **Rebound Burst**               | L5 pyramidal / LTS    | Burst following hyperpolarising pulse                      |
 
 ### Emergent phenomena (no explicit rules required)
-- **Depolarization block** — natural consequence of h-channel saturation at high current
-- **Post-inhibitory rebound spike** — single spike after hyperpolarization (rate_h2/rate_h1 ≈ 0.26)
-- **Post-inhibitory rebound burst** — burst after hyperpolarization (rate_h2/rate_h1 ≈ 0.67)
+- **Depolarisation block** — natural consequence of h-channel saturation at high current
+- **Post-inhibitory rebound spike** — single spike after hyperpolarisation (rate_h2/rate_h1 ≈ 0.26)
+- **Post-inhibitory rebound burst** — burst after hyperpolarisation (rate_h2/rate_h1 ≈ 0.67)
 - **Class 1 vs Class 2 excitability** — SNIC vs Hopf bifurcation, controlled by th_K
 
 ---
 
 ## Repository Contents
 
-| File                | Description                              |
-|:--------------------|:-----------------------------------------|
-| `model_silvera.sci` | Reference implementation in Scilab (RK4) |
-| `model_silvera.py`  | Python implementation (NumPy, RK4)       |
-| `CITATION.cff`      | Citation metadata                        |
-| `README.md`         | This file                                |
-| `LICENSE`           | License file                             |
+| File                    | Description                                                        |
+|:------------------------|:-------------------------------------------------------------------|
+| `model_silvera.sci`     | Reference implementation in Scilab (RK4)                          |
+| `model_silvera.py`      | Python implementation (NumPy, RK4)                                 |
+| `plot_phenotypes.py`    | Generates publication-quality voltage trace figure (PDF)           |
+| `phenotype_traces.pdf`  | Figure: voltage traces and spike overlays for all phenotypes       |
+| `*.xml`                 | Parameter files for each validated phenotype                       |
+| `CITATION.cff`          | Citation metadata (CFF format)                                     |
+| `LICENSE`               | License file (CC BY-NC-SA 4.0)                                     |
+| `README.md`             | This file                                                          |
 
 ---
 
@@ -109,7 +116,7 @@ Requires **Scilab 6.x or later** (free, open-source). No additional toolboxes re
 exec('model_silvera.sci', -1)
 ```
 
-Parameters can be modified directly in the script. Phenotype-specific parameter sets are documented in the accompanying paper.
+Parameters can be modified directly in the script. Phenotype-specific parameter sets are provided in the accompanying XML files.
 
 ---
 
@@ -129,13 +136,23 @@ Install with pip:
 pip install numpy matplotlib
 ```
 
-### Run
+### Run the model
 
 ```bash
 python model_silvera.py
 ```
 
 Parameters can be modified directly at the top of the script (section 1. PARAMETERS).
+
+### Generate the phenotype figure
+
+Place `plot_phenotypes.py` in the same directory as the XML parameter files, then run:
+
+```bash
+python plot_phenotypes.py
+```
+
+This will simulate all phenotypes found in the directory and save `phenotype_traces.pdf`.
 
 ---
 
@@ -145,7 +162,7 @@ Parameters can be modified directly at the top of the script (section 1. PARAMET
 |:------------------|:--------------------------------------|:-------------------------------------------|
 | Na⁺ activation    | th_Na, p_Na, rate_Na, g_Na_max, E_Na | Spike threshold, upstroke speed, amplitude |
 | Na⁺ inactivation  | rate_h1, rate_h2                      | Refractory period, firing bandwidth        |
-| K⁺ repolarization | th_K, p_K, rate_K, g_K_max, E_K      | Spike width, AHP depth, inter-spike traj.  |
+| K⁺ repolarisation | th_K, p_K, rate_K, g_K_max, E_K      | Spike width, AHP depth, inter-spike trajectory |
 | Leak & adaptation | g_L, v_rest, g_adapt, rate_slow, C_m | Resting potential, slow adaptation         |
 
 ---
